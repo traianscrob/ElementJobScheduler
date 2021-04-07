@@ -1,0 +1,12 @@
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\Element.Data.dll.config
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\Element.Data.dll
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\Element.Data.pdb
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\EntityFramework.dll
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\EntityFramework.xml
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\obj\Debug\Element.Data.csprojAssemblyReference.cache
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\obj\Debug\Element.Data.csproj.CoreCompileInputs.cache
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\obj\Debug\Element.Data.csproj.CopyComplete
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\obj\Debug\Element.Data.dll
+C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Data\obj\Debug\Element.Data.pdb
