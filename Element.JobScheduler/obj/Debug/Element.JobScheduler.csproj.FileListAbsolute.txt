@@ -2,7 +2,6 @@ C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\bin\Debug\
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\bin\Debug\Element.JobScheduler.pdb
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\bin\Debug\Cronos.dll
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\bin\Debug\Cronos.xml
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\obj\Debug\Element.JobScheduler.csprojAssemblyReference.cache
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\obj\Debug\Element.JobScheduler.csproj.CoreCompileInputs.cache
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\obj\Debug\Element.JobScheduler.csproj.CopyComplete
 C:\Users\tscrob\source\repos\ElementJobScheduler\Element.JobScheduler\obj\Debug\Element.JobScheduler.dll
