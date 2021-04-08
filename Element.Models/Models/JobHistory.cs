@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,11 +10,15 @@ namespace Element.Models
         [Key]
         public Guid Id { get; set; }
 
-        [ForeignKey("Id")]
         public Guid JobId { get; set; }
 
         public string Description { get; set; }
 
+        public bool WasSuccessful { get; set; }
+
         public DateTime ExecutionDate { get; set; }
+
+        [ForeignKey("Id")]
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

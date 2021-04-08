@@ -19,6 +19,11 @@ namespace Element.JobSchedulerUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            RegisteLightInject();
+        }
+
+        private static void RegisteLightInject()
+        {
             var container = new ServiceContainer();
             container.Register<IElementDbContext, ElementDbContext>();
             container.Register<IUnitOfWork, UnitOfWork>();
