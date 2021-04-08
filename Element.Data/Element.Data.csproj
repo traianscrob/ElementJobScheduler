@@ -55,9 +55,9 @@
     <Compile Include="ElementDbContext.cs" />
     <Compile Include="Interfaces\IElementDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202104080506486_Initial.cs" />
-    <Compile Include="Migrations\202104080506486_Initial.designer.cs">
-      <DependentUpon>202104080506486_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202104081047219_InitDb.cs" />
+    <Compile Include="Migrations\202104081047219_InitDb.designer.cs">
+      <DependentUpon>202104081047219_InitDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,8 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104080506486_Initial.resx">
-      <DependentUpon>202104080506486_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104081047219_InitDb.resx">
+      <DependentUpon>202104081047219_InitDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

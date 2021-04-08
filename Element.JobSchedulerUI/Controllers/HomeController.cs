@@ -1,12 +1,23 @@
-﻿using System.Web.Mvc;
+﻿using Element.Data.Interfaces;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Element.JobSchedulerUI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var jobs = _unitOfWork.DbContext.Jobs.ToList();
+
+            return View(jobs);
         }
 
         public ActionResult About()

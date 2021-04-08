@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Element.Data\Element.Data.csproj">
+      <Project>{18B07CA2-C1BA-46A7-A488-5C0B12DE71E5}</Project>
+      <Name>Element.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Element.JobSchedulerUI\Element.JobSchedulerUI.csproj">
       <Project>{54E619D2-54F5-4AEF-B2B1-43F409FB3137}</Project>
       <Name>Element.JobSchedulerUI</Name>

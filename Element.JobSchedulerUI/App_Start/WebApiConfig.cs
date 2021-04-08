@@ -1,7 +1,10 @@
-﻿using Element.JobScheduler.Configuration;
+﻿using Element.Data;
+using Element.Data.Interfaces;
+using Element.JobScheduler.Configuration;
 using Element.JobScheduler.Interfaces;
 using Element.JobSchedulerUI.Extensions;
 using Element.JobSchedulerUI.JobScheduler;
+using LightInject;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -34,7 +37,10 @@ namespace Element.JobSchedulerUI
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            var container = GetServiceContainer();
+
             config.UseElementJobs((configuration) => {
+                configuration.UseStorageProvider(container.GetInstance<IScheduledJobStorageProvider>());
                 configuration.OnErrorCallback = (ex) => { };
                 configuration.OnJobStart = (job) =>
                 {
@@ -70,6 +76,19 @@ namespace Element.JobSchedulerUI
                 MethodInfo generic = method.MakeGenericMethod(jobType);
                 generic.Invoke(BackgroundJob.Instance, new[] { job.Schedule });
             }
+        }
+
+        private static IServiceContainer GetServiceContainer()
+        {
+            var container = new ServiceContainer();
+            container.Register<IElementDbContext, ElementDbContext>();
+            container.Register<IUnitOfWork, UnitOfWork>();
+            container.Register<IScheduledJobStorageProvider, SqlStorageProvider>();
+
+            container.RegisterControllers();
+            container.EnableMvc();
+
+            return container;
         }
     }
 }

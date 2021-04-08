@@ -155,6 +155,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\BackgroundJob.cs" />
     <Compile Include="Extensions\JobSchedulerExtensions.cs" />
+    <Compile Include="Extensions\SqlStorageProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +224,10 @@
     <ProjectReference Include="..\Element.JobScheduler\Element.JobScheduler.csproj">
       <Project>{43c9b392-768f-4150-810a-eaac700de29e}</Project>
       <Name>Element.JobScheduler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Element.Models\Element.Models.csproj">
+      <Project>{BD21F601-4313-489A-8DB1-94AEC4B08973}</Project>
+      <Name>Element.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

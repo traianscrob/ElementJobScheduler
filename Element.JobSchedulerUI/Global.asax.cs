@@ -1,7 +1,4 @@
-﻿using Element.Data;
-using Element.Data.Interfaces;
-using LightInject;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -18,18 +15,6 @@ namespace Element.JobSchedulerUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            RegisteLightInject();
-        }
-
-        private static void RegisteLightInject()
-        {
-            var container = new ServiceContainer();
-            container.Register<IElementDbContext, ElementDbContext>();
-            container.Register<IUnitOfWork, UnitOfWork>();
-
-            container.RegisterControllers();
-            container.EnableMvc();
         }
     }
 }

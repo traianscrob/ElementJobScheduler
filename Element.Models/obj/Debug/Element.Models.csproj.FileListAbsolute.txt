@@ -1,5 +1,0 @@
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Models\bin\Debug\Element.Models.dll
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Models\bin\Debug\Element.Models.pdb
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Models\obj\Debug\Element.Models.csproj.CoreCompileInputs.cache
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Models\obj\Debug\Element.Models.dll
-C:\Users\tscrob\source\repos\ElementJobScheduler\Element.Models\obj\Debug\Element.Models.pdb

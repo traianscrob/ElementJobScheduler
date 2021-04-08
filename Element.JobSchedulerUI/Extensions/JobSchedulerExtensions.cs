@@ -13,6 +13,11 @@ namespace Element.JobSchedulerUI.JobScheduler
             BackgroundJob.EnableJobScheduler(config);
         }
 
+        public static void UseElementJobs(this HttpConfiguration configuration, string connectionString, Action<JobSchedulerConfiguration> config)
+        {
+            BackgroundJob.EnableJobScheduler(config);
+        }
+
         public static void UseElementJobsDashboard(this ServiceCollection services, Action<JobSchedulerConfiguration> config)
         {
             services.Add(new Service() {

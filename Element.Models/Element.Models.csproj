@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\JobHistoryInfo.cs" />
+    <Compile Include="Dtos\JobInfo.cs" />
     <Compile Include="Models\JobHistory.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
