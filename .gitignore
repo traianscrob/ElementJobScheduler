@@ -5,6 +5,7 @@
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-shm
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-wal
 .vs/ElementJobScheduler/v15/.suo
+Element.JobSchedulerUI.Tests/bin/.*
 Element.JobSchedulerUI.Tests/bin/Debug/Microsoft.TestPlatform.AdapterUtilities.dll
 Element.JobSchedulerUI.Tests/bin/Debug/LightInject.xml
 Element.JobSchedulerUI.Tests/bin/Debug/LightInject.Web.xml
@@ -36,12 +37,14 @@ Element.JobSchedulerUI.Tests/bin/Debug/Element.Data.dll
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-shm
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-wal
+Element.Data/bin/.*
 Element.Data/bin/Debug/Element.Data.dll
 Element.Data/bin/Debug/Element.Data.dll.config
 Element.Data/bin/Debug/Element.Data.pdb
 Element.Data/bin/Debug/Element.Models.dll
 Element.Data/bin/Debug/Element.Models.pdb
 *.cache
+Element.Data/obj/.*
 Element.Data/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Element.Data/obj/Debug/Element.Data.csproj.CoreCompileInputs.cache
 Element.Data/obj/Debug/Element.Data.csproj.FileListAbsolute.txt
@@ -63,9 +66,12 @@ Element.JobSchedulerUI/bin/Element.JobSchedulerUI.pdb
 Element.JobSchedulerUI/bin/Element.Models.dll
 Element.JobSchedulerUI/bin/Element.Models.pdb
 *.cache
+Element.JobSchedulerUI/obj/.*
 Element.JobSchedulerUI/obj/Debug/Element.JobSchedulerUI.dll
 Element.JobSchedulerUI/obj/Debug/Element.JobSchedulerUI.pdb
+Element.Models/bin/.*
 Element.Models/bin/Debug/Element.Models.dll
 Element.Models/bin/Debug/Element.Models.pdb
+Element.Models/obj/.*
 Element.Models/obj/Debug/Element.Models.dll
 Element.Models/obj/Debug/Element.Models.pdb
