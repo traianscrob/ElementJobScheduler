@@ -55,12 +55,9 @@
     <Compile Include="Interfaces\IJobScheduler.cs" />
     <Compile Include="JobTimer.cs" />
     <Compile Include="Models\JobModel.cs" />
-    <Compile Include="ScheduledJobStorageEntity.cs" />
-    <Compile Include="Interfaces\IScheduledJobStorageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JobScheduler.cs" />
     <Compile Include="JobSchedulerManager.cs" />
-    <Compile Include="ScheduledJobStorageEntityHistory.cs" />
     <Compile Include="TaskScheduler.cs" />
   </ItemGroup>
   <ItemGroup>

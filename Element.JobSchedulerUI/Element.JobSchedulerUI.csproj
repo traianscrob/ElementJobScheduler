@@ -159,7 +159,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\BackgroundJob.cs" />
     <Compile Include="Extensions\JobSchedulerExtensions.cs" />
-    <Compile Include="Extensions\SqlStorageProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,10 +223,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Element.Data\Element.Data.csproj">
-      <Project>{18b07ca2-c1ba-46a7-a488-5c0b12de71e5}</Project>
-      <Name>Element.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Element.JobScheduler\Element.JobScheduler.csproj">
       <Project>{43c9b392-768f-4150-810a-eaac700de29e}</Project>
       <Name>Element.JobScheduler</Name>

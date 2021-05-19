@@ -1,8 +1,4 @@
-﻿using Element.Data;
-using Element.Data.Interfaces;
-using Element.JobScheduler.Interfaces;
-using Element.JobSchedulerUI.Extensions;
-using Element.JobSchedulerUI.JobScheduler;
+﻿using Element.JobSchedulerUI.JobScheduler;
 using LightInject;
 using System.Web;
 using System.Web.Http;
@@ -25,7 +21,6 @@ namespace Element.JobSchedulerUI
             var container = GetServiceContainer();
 
             GlobalConfiguration.Configuration.UseJobScheduler((configuration) => {
-                configuration.UseStorageProvider(container.GetInstance<IScheduledJobStorageProvider>());
                 configuration.OnErrorCallback = (job, ex) => { };
                 configuration.OnJobStart = (job) =>
                 {
@@ -39,10 +34,6 @@ namespace Element.JobSchedulerUI
         private static IServiceContainer GetServiceContainer()
         {
             var container = new ServiceContainer();
-            container.Register<IElementDbContext, ElementDbContext>();
-            container.Register<IUnitOfWork, UnitOfWork>();
-            container.Register<IScheduledJobStorageProvider, SqlStorageProvider>();
-
             container.RegisterControllers();
             container.EnableMvc();
 
