@@ -227,10 +227,6 @@
       <Project>{43c9b392-768f-4150-810a-eaac700de29e}</Project>
       <Name>Element.JobScheduler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Element.Models\Element.Models.csproj">
-      <Project>{BD21F601-4313-489A-8DB1-94AEC4B08973}</Project>
-      <Name>Element.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
