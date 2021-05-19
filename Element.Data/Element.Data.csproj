@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementDbContext.cs" />
+    <Compile Include="ElementRepository.cs" />
     <Compile Include="Interfaces\IElementDbContext.cs" />
+    <Compile Include="Interfaces\IElementRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\202104081047219_InitDb.cs" />
     <Compile Include="Migrations\202104081047219_InitDb.designer.cs">

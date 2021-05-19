@@ -1,8 +1,8 @@
-﻿using Cronos;
-using Element.JobScheduler.Interfaces;
-using Element.Models.Dtos;
+﻿using Element.JobScheduler.Interfaces;
+using Element.JobScheduler.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,124 +10,83 @@ namespace Element.JobScheduler
 {
     internal class JobScheduler : IJobScheduler, IDisposable
     {
-        private readonly JobSchedulerConfiguration _config = new JobSchedulerConfiguration();
-        private readonly TaskScheduler _taskScheduler = new TaskScheduler();
-        private readonly Dictionary<string, Timer> _timersDictionary = new Dictionary<string, Timer>();
-
-        private Action<string, string, DateTime?> _onJobUpdate;
+        private readonly JobSchedulerConfiguration _config;
+        private readonly IDisposableDictionary<Type, JobTimer> _timersDict;
 
         public JobScheduler(Action<JobSchedulerConfiguration> config)
         {
+            _config = new JobSchedulerConfiguration();
+            _timersDict = new DisposableConcurrentDictionary<Type, JobTimer>();
+
             config.Invoke(_config);
-
-            _onJobUpdate = (name, cron, date) => _config.StorageProvider?.SaveJob(new JobInfo { Name = name, CronExpression = cron, LastSuccessfulRun = date });
-        }
-
-        public IJobScheduler Execute<T>() where T : IScheduledJob
-        {
-            var name = typeof(T).Name;
-            Task.Factory.StartNew(() =>
-            {
-                _config.OnJobStart?.Invoke(name);
-                Activator.CreateInstance<T>().Execute();
-            }, CancellationToken.None, TaskCreationOptions.LongRunning, _taskScheduler)
-                .ContinueWith(task =>
-                {
-                    ContinueWith(task, name);
-                });
-
-            return this;
         }
 
         public IJobScheduler Execute(Action action)
         {
-            Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.LongRunning, _taskScheduler)
-                .ContinueWith(task =>
-                {
-                    ContinueWith(task);
-                });
+            Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.LongRunning, new TaskScheduler());
 
             return this;
+        }
+
+        public void Trigger(string job)
+        {
+            GetJobTimer(job)?.Trigger();
         }
 
         public IJobScheduler ScheduleJob<T>(string cronExpression) where T : IScheduledJob
         {
-            var name = typeof(T).Name;
-            if (_timersDictionary.ContainsKey(name))
+            var type = typeof(T);
+            if (_timersDict.ContainsKey(type))
             {
-                throw new Exception($"There's already a job with the name: {name}");
+                throw new Exception($"There's already a job with the name: {type.Name}");
             }
 
-            var timer = GetJobTimer(name, () =>
-            {
-                _config.OnJobStart?.Invoke(name);
-                Activator.CreateInstance<T>().Execute();
-            }, cronExpression);
+            var timer = JobTimer.New<T>(cronExpression, _config);
 
-            _timersDictionary.Add(name, timer);
+            _timersDict.Add(type, timer);
 
             return this;
         }
 
+        public void Cancel(string job)
+        {
+            var timer = GetJobTimer(job);
+            if (timer == null || !timer.IsRunning)
+            {
+                return;
+            }
+
+            timer.Cancel();
+        }
+
+        public IEnumerable<JobModel> GetJobs()
+        {
+            return _timersDict.Select(x => new JobModel
+            {
+                Name = x.Key.Name,
+                LastCancelledDate = x.Value.LastCancelled,
+                LastRunDate = x.Value.LastRun,
+                LastExecutionDuration = x.Value.LastExecutionDuration,
+                RunWithSuccess = x.Value.RunWithSuccess,
+                NextRunDate = x.Value.NextRun,
+                IsRunning = x.Value.IsRunning,
+                IsCancelling = x.Value.IsCancelling
+            }).OrderBy(x => x.NextRunDate);
+        }
+
         public void Dispose()
         {
-            _taskScheduler?.Dispose();
-            _timersDictionary?.Clear();
+            _timersDict?.Dispose();
 
             GC.SuppressFinalize(this);
         }
 
-        private Timer GetJobTimer(string name, Action action, string cronExpression)
+        private JobTimer GetJobTimer(string job)
         {
-            CronExpression expression = CronExpression.Parse(cronExpression, CronFormat.Standard);
-            DateTimeOffset next = expression.GetNextOccurrence(DateTimeOffset.Now, TimeZoneInfo.Local) ?? DateTimeOffset.Now;
-            DateTimeOffset nextAfterNext = expression.GetNextOccurrence(next, TimeZoneInfo.Local) ?? next;
-
-            var startTime = next - DateTimeOffset.Now;
-            var period = nextAfterNext - next;
-
-            var timer = new Timer((callback) =>
-            {
-                Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.LongRunning, _taskScheduler)
-                .ContinueWith(task => ContinueWith(task, name, cronExpression));
-            }, null, (long)startTime.TotalMilliseconds, (long)period.TotalMilliseconds);
-
-            _onJobUpdate?.Invoke(name, cronExpression, null);
-
-            return timer;
-        }
-
-        public void ContinueWith(Task task, string jobName, string cronExpression)
-        {
-            bool hasErrors = task.Exception != null;
-
-            _config.StorageProvider?.AddHistory(new JobHistoryInfo
-            {
-                JobName = jobName,
-                Description = hasErrors ? $"Job failed: {task.Exception}" : "Job executed successfuly",
-                ExecutionDate = DateTime.Now,
-                RunSuccessfuly = !hasErrors
-            });
-
-            if (hasErrors)
-            {
-                _config.OnErrorCallback?.Invoke(task.Exception);
-                return;
-            }
-
-            _config.OnJobEnd?.Invoke(jobName);
-            _onJobUpdate?.Invoke(jobName, cronExpression, DateTime.Now);
-        }
-
-        private void ContinueWith(Task task, string jobName = "Anonymous execution")
-        {
-            if (task.Exception != null)
-            {
-                _config.OnErrorCallback?.Invoke(task.Exception);
-                return;
-            }
-
-            _config.OnJobEnd?.Invoke(jobName);
+            var jobType = _timersDict.SingleOrDefault(x => x.Key.Name.Equals(job));
+            return Equals(jobType, default(KeyValuePair<Type, JobTimer>))
+                ? null
+                : jobType.Value;
         }
     }
 }

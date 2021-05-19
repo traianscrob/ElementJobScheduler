@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Element.Data.Interfaces
 {
@@ -7,5 +8,9 @@ namespace Element.Data.Interfaces
         IElementDbContext DbContext { get; }
 
         int Save();
+
+        Task<int> SaveChangesAsync();
+
+        IElementRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
     }
 }

@@ -1,30 +1,41 @@
 ﻿using Element.JobScheduler;
-using Element.JobSchedulerUI.Extensions;
+using Element.JobScheduler.Configuration;
+using Element.JobScheduler.Interfaces;
 using System;
+using System.Configuration;
+using System.Linq;
 using System.Web.Http;
-using System.Web.Services.Description;
 
 namespace Element.JobSchedulerUI.JobScheduler
 {
     public static class JobSchedulerExtensions
     {
-        public static void UseElementJobs(this HttpConfiguration configuration, Action<JobSchedulerConfiguration> config)
+        public static void UseJobScheduler(this HttpConfiguration configuration, Action<JobSchedulerConfiguration> config)
         {
-            BackgroundJob.EnableJobScheduler(config);
+            JobSchedulerManager.EnableJobScheduler(config);
+            JobSchedulerManager.Instance.EnqueueJobsFromConfig();
         }
 
-        public static void UseElementJobs(this HttpConfiguration configuration, string connectionString, Action<JobSchedulerConfiguration> config)
+        internal static void EnqueueJobsFromConfig(this IJobScheduler scheduler)
         {
-            BackgroundJob.EnableJobScheduler(config);
-        }
+            var jobTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(type => typeof(IScheduledJob).IsAssignableFrom(type))
+                .ToArray();
 
-        public static void UseElementJobsDashboard(this ServiceCollection services, Action<JobSchedulerConfiguration> config)
-        {
-            services.Add(new Service() {
+            var jobsSection = (JobSchedulerSection)ConfigurationManager.GetSection("JobSchedulerSection");
+            foreach (JobConfigElement job in jobsSection.Jobs)
+            {
+                var jobType = jobTypes.SingleOrDefault(x => x.Name.Equals(job.Name));
+                if (jobType == null)
+                {
+                    continue;
+                }
 
-            });
-
-            BackgroundJob.EnableJobScheduler(config);
+                var method = typeof(IJobScheduler).GetMethod(nameof(IJobScheduler.ScheduleJob));
+                var generic = method?.MakeGenericMethod(jobType);
+                generic?.Invoke(scheduler, new object[] { job.Schedule });
+            }
         }
     }
 }

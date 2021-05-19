@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Element.Models
+namespace Element.Models.DbModels
 {
     [Table("JobHistories", Schema = "Element")]
     public class JobHistory
@@ -20,6 +20,6 @@ namespace Element.Models
         public DateTime ExecutionDate { get; set; }
 
         [ForeignKey("JobId")]
-        public virtual Job Job { get; set; }
+        public Job Job { get; set; }
     }
 }

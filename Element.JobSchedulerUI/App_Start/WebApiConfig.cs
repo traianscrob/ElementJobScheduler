@@ -10,7 +10,6 @@ using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
-using WebGrease;
 
 namespace Element.JobSchedulerUI
 {
@@ -18,16 +17,6 @@ namespace Element.JobSchedulerUI
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            var logger = new LogManager((log, msg) =>
-            {
-                
-            },
-            (warning) =>
-            {
-
-            }, null, (error) => { }, null, null);
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -36,59 +25,6 @@ namespace Element.JobSchedulerUI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            var container = GetServiceContainer();
-
-            config.UseElementJobs((configuration) => {
-                configuration.UseStorageProvider(container.GetInstance<IScheduledJobStorageProvider>());
-                configuration.OnErrorCallback = (ex) => { };
-                configuration.OnJobStart = (job) =>
-                {
-                    logger.Information($"{job} started at {DateTime.Now}");
-                };
-                configuration.OnJobEnd = (job) =>
-                {
-                    logger.Information($"{job} finished at {DateTime.Now}");
-                };
-
-                logger.Information($"JobScheduler is up and running!");
-            });
-
-            EnqueueJobsFromConfig();
-        }
-
-        private static void EnqueueJobsFromConfig()
-        {
-            var jobTypes = AppDomain.CurrentDomain.GetAssemblies()
-                                        .SelectMany(s => s.GetTypes())
-                                        .Where(type => typeof(IScheduledJob).IsAssignableFrom(type));
-
-            var jobsSection = (JobSchedulerSection)ConfigurationManager.GetSection("JobSchedulerSection");
-            foreach (JobConfigElement job in jobsSection.Jobs)
-            {
-                var jobType = jobTypes.SingleOrDefault(x => x.Name.Equals(job.Name));
-                if (jobType == null)
-                {
-                    continue;
-                }
-
-                MethodInfo method = typeof(IJobScheduler).GetMethod(nameof(IJobScheduler.ScheduleJob));
-                MethodInfo generic = method.MakeGenericMethod(jobType);
-                generic.Invoke(BackgroundJob.Instance, new[] { job.Schedule });
-            }
-        }
-
-        private static IServiceContainer GetServiceContainer()
-        {
-            var container = new ServiceContainer();
-            container.Register<IElementDbContext, ElementDbContext>();
-            container.Register<IUnitOfWork, UnitOfWork>();
-            container.Register<IScheduledJobStorageProvider, SqlStorageProvider>();
-
-            container.RegisterControllers();
-            container.EnableMvc();
-
-            return container;
         }
     }
 }

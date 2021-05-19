@@ -1,23 +1,18 @@
-﻿using Element.Models.Dtos;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Element.JobScheduler.Interfaces
 {
-    public interface IScheduledJobStorageProvider
+    public interface IScheduledJobStorageProvider : IDisposable
     {
-        /// <summary>
-        /// adds or updates info related to a job
-        /// </summary>
-        void SaveJob(JobInfo job);
+        Task PersistJob(ScheduledJobStorageEntity job);
+        Task PersistHistory(ScheduledJobStorageEntityHistory job);
 
-        /// <summary>
-        /// adds info related to jobs
-        /// </summary>
-        void AddHistory(JobHistoryInfo history);
+        Task<ScheduledJobStorageEntity> Get(string name);
 
-        /// <summary>
-        /// deletes a job
-        /// </summary>
-        /// <param name="name"></param>
-        void Delete(string name);
+        List<ScheduledJobStorageEntity> GetJobs();
+
+        List<ScheduledJobStorageEntityHistory> GetHistory(string jobName);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Element.Data.Interfaces;
-using Element.Models;
+using Element.Models.DbModels;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace Element.Data
 {
@@ -10,6 +11,7 @@ namespace Element.Data
             : base("name=ConnectionString")
         {
             ((System.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.CommandTimeout = 180;
+            ((System.Data.Entity.Infrastructure.IObjectContextAdapter)this).ObjectContext.ContextOptions.LazyLoadingEnabled = false;
         }
 
         public IDbSet<Job> Jobs { get; set; }

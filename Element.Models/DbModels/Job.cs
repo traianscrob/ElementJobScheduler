@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Element.Models
+namespace Element.Models.DbModels
 {
     [Table("Jobs", Schema = "Element")]
     public class Job

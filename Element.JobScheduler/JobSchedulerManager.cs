@@ -5,9 +5,8 @@ namespace Element.JobScheduler
 {
     public static class JobSchedulerManager
     {
-        public static IJobScheduler Create(Action<JobSchedulerConfiguration> config)
-        {
-            return new JobScheduler(config);
-        }
+        public static IJobScheduler Instance { get; private set; }
+
+        public static void EnableJobScheduler(Action<JobSchedulerConfiguration> config) => Instance = new JobScheduler(config);
     }
 }

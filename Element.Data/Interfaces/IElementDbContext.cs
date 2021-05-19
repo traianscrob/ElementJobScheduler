@@ -1,6 +1,7 @@
-﻿using Element.Models;
+﻿using Element.Models.DbModels;
 using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Element.Data.Interfaces
 {
@@ -10,5 +11,8 @@ namespace Element.Data.Interfaces
         IDbSet<JobHistory> JobHistories { get; set; }
 
         int SaveChanges();
+        Task<int> SaveChangesAsync();
+
+        DbSet<T> Set<T>() where T : class;
     }
 }

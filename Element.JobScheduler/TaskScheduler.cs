@@ -40,6 +40,8 @@ namespace Element.JobScheduler
             _tasks.CompleteAdding();
             _tasks.Dispose();
 
+            mainThread?.Abort();
+
             GC.SuppressFinalize(this);
         }
 

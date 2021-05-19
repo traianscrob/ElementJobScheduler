@@ -42,10 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\JobHistoryInfo.cs" />
-    <Compile Include="Dtos\JobInfo.cs" />
-    <Compile Include="Models\JobHistory.cs" />
-    <Compile Include="Models\Job.cs" />
+    <Compile Include="DbModels\JobHistory.cs" />
+    <Compile Include="DbModels\Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

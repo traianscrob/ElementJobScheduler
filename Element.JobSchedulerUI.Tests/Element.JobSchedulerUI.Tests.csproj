@@ -101,6 +101,10 @@
       <Project>{54E619D2-54F5-4AEF-B2B1-43F409FB3137}</Project>
       <Name>Element.JobSchedulerUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Element.JobScheduler\Element.JobScheduler.csproj">
+      <Project>{43C9B392-768F-4150-810A-EAAC700DE29E}</Project>
+      <Name>Element.JobScheduler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

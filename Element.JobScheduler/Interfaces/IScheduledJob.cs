@@ -1,7 +1,9 @@
-﻿namespace Element.JobScheduler.Interfaces
+﻿using System.Threading;
+
+namespace Element.JobScheduler.Interfaces
 {
     public interface IScheduledJob
     {
-        void Execute();
+        void Execute(CancellationToken token);
     }
 }
