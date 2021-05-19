@@ -1,6 +1,4 @@
-﻿using Element.JobScheduler.Interfaces;
-using Element.Models;
-using System;
+﻿using System;
 
 namespace Element.JobScheduler
 {
