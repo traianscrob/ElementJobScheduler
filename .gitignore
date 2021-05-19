@@ -492,3 +492,7 @@ Element.Models/obj/Debug/Element.Models.csproj.FileListAbsolute.txt
 .vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-wal
 Element.JobSchedulerUI.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Element.JobScheduler/obj/Debug/build.force
+Element.JobScheduler/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Element.JobSchedulerUI/obj/Debug/build.force
+Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
