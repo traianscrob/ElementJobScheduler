@@ -486,3 +486,9 @@ Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Element.JobSchedulerUI/obj/Debug/Element.JobSchedulerUI.csproj.CopyComplete
 Element.JobSchedulerUI/obj/Debug/Element.JobSchedulerUI.csproj.FileListAbsolute.txt
 Element.Models/obj/Debug/Element.Models.csproj.FileListAbsolute.txt
+.vs/ElementJobScheduler/v15/Server/sqlite3/db.lock
+.vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide
+.vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-shm
+.vs/ElementJobScheduler/v15/Server/sqlite3/storage.ide-wal
+Element.JobSchedulerUI.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
