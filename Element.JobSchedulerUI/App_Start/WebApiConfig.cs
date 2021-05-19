@@ -1,15 +1,4 @@
-﻿using Element.Data;
-using Element.Data.Interfaces;
-using Element.JobScheduler.Configuration;
-using Element.JobScheduler.Interfaces;
-using Element.JobSchedulerUI.Extensions;
-using Element.JobSchedulerUI.JobScheduler;
-using LightInject;
-using System;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Element.JobSchedulerUI
 {
