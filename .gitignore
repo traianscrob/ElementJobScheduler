@@ -496,3 +496,6 @@ Element.JobScheduler/obj/Debug/build.force
 Element.JobScheduler/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Element.JobSchedulerUI/obj/Debug/build.force
 Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+.vs/config/applicationhost.config
+Element.JobScheduler/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Element.JobSchedulerUI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
