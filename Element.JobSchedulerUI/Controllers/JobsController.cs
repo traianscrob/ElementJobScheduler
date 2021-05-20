@@ -10,14 +10,14 @@ namespace Element.JobSchedulerUI.Controllers
         [Route("all")]
         public IHttpActionResult GetAll()
         {
-            return Ok(BackgroundJob.Instance.GetJobs());
+            return Ok(BackgroundJob.Instance?.GetJobs());
         }
 
         [HttpPost]
         [Route("{job}/trigger")]
         public IHttpActionResult Trigger(string job)
         {
-            BackgroundJob.Instance.Trigger(job);
+            BackgroundJob.Instance?.Trigger(job);
 
             return Ok();
         }
@@ -26,7 +26,7 @@ namespace Element.JobSchedulerUI.Controllers
         [Route("{job}/cancel")]
         public IHttpActionResult Cancel(string job)
         {
-            BackgroundJob.Instance.Cancel(job);
+            BackgroundJob.Instance?.Cancel(job);
 
             return Ok();
         }

@@ -1,5 +1,6 @@
 ﻿using Element.JobSchedulerUI.Extensions;
-using System.Linq;
+using Element.JobSchedulerUI.Models;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Element.JobSchedulerUI.Controllers
@@ -12,8 +13,7 @@ namespace Element.JobSchedulerUI.Controllers
 
         public ActionResult Index()
         {
-            var model = this.GetAllJobs().ToList();
-            return View(model);
+            return View(this.GetAllJobs() ?? new List<JobModelView>());
         }
 
         public ActionResult Trigger(string job)

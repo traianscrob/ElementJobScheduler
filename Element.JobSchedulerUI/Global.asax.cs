@@ -16,16 +16,6 @@ namespace Element.JobSchedulerUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            GlobalConfiguration.Configuration.UseJobScheduler((configuration) => {
-                configuration.OnErrorCallback = (job, ex) => { };
-                configuration.OnJobStart = (job) =>
-                {
-                };
-                configuration.OnJobEnd = (job) =>
-                {
-                };
-            });
         }
     }
 }
