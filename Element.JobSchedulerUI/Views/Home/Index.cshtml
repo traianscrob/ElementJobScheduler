@@ -41,7 +41,7 @@
              nextText: "Next >",
              lastText: "Last >>",
                 columns: grid.Columns(
-                    grid.Column("", format: @<a data-value="@item.Name" href="@Url.Action(@item.Action, "Home", new { job = @item.Name })">@item.Action</a>),
+                    grid.Column("", format: @<a data-value="@item.Name" href="@Url.Action(@item.Action, "Home", new { job = @item.Name })">@item.Action</a>, style:"width:30px;"),
                      grid.Column("Name", " Job name", style: "Large"),
                      grid.Column("LastRunDate", "Run Date"),
                      grid.Column("LastExecutionDuration", "Duration"),
