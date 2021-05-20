@@ -1,2 +1,4 @@
 # ElementJobScheduler
- Lightweight job scheduler
+ Lightweight job scheduler written in C#.
+ 
+This is a basic basic job scheduler you can include in your app/website
