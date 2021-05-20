@@ -53,6 +53,7 @@
     <Compile Include="Interfaces\IDisposableDictionary.cs" />
     <Compile Include="Interfaces\IScheduledJob.cs" />
     <Compile Include="Interfaces\IJobScheduler.cs" />
+    <Compile Include="JobCancellationTokenSource.cs" />
     <Compile Include="JobTimer.cs" />
     <Compile Include="Models\JobModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

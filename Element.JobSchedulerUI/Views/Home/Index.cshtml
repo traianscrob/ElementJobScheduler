@@ -1,4 +1,4 @@
-﻿@model List<Element.JobScheduler.Models.JobModel>
+﻿@model List<Element.JobSchedulerUI.Models.JobModelView>
 @{
     ViewBag.Title = "Element Jobs";
     WebGrid grid = new WebGrid(Model);
@@ -9,26 +9,48 @@
     <p class="lead">@ViewBag.Title is a lightweight job scheduler.</p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Jobs overview</h2>
+<style type="text/css">
+    .Large {
+        width: 25%;
+    }
 
-        @grid.GetHtml(
-        mode: WebGridPagerModes.FirstLast,
-        tableStyle: "tranlist",
-        headerStyle: "headerstyle",
-        footerStyle: "webgrid-footer",
-        firstText: "First",
-        lastText: "Last",
-        alternatingRowStyle: "webgrid-alternating-row",
-        rowStyle: "webgrid-row-style",
-        numericLinksCount: 5,
-        columns: new[] {
-            grid.Column("Name", header: "Job name", style:"bigcolumn"),
-            grid.Column("LastRunDate", header: "Run Date", style:"bigcolumn"),
-            grid.Column("LastExecutionDuration", header: "Duration", style:"bigcolumn"),
-            grid.Column("RunWithSuccess", header: "Execution status", style:"bigcolumn"),
-            grid.Column("NextRunDate", header: "Next run", style:"bigcolumn"),
-         })
+    .Grid {
+        max-width: 100%;
+    }
+
+    .Image {
+        width: 25px;
+        height: 25px;
+    }
+
+    [src=''] {
+        visibility: hidden;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md Grid">
+        <h2>Jobs overview</h2>
+        <div class="Grid">
+            @grid.GetHtml(tableStyle: "table table-hover",
+             headerStyle: "header_table",
+             alternatingRowStyle: "alt-row_table",
+             mode: WebGridPagerModes.All,
+             firstText: "<< First",
+             previousText: "< Prev",
+             nextText: "Next >",
+             lastText: "Last >>",
+                columns: grid.Columns(
+                    grid.Column("", format: @<a data-value="@item.Name" href="@Url.Action(@item.Action, "Home", new { job = @item.Name })">@item.Action</a>),
+                     grid.Column("Name", " Job name", style: "Large"),
+                     grid.Column("LastRunDate", "Run Date"),
+                     grid.Column("LastExecutionDuration", "Duration"),
+                     grid.Column("RunWithSuccess", "Status", format: @<img src="@(string.IsNullOrEmpty(@item.ImageUrl) ? "" : @Url.Content(@item.ImageUrl))" class="Image" />),
+                     grid.Column("NextRunDate", "Next run", style: "Large")
+             ))
+            <div style="float:right">
+                @Html.ActionLink("Refresh", "Index")
+            </div>
+        </div>
     </div>
 </div>

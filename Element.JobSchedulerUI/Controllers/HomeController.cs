@@ -1,5 +1,4 @@
-﻿using Element.JobScheduler.Interfaces;
-using Element.JobSchedulerUI.Extensions;
+﻿using Element.JobSchedulerUI.Extensions;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -13,23 +12,22 @@ namespace Element.JobSchedulerUI.Controllers
 
         public ActionResult Index()
         {
-            var jobs = BackgroundJob.Instance.GetJobs().ToList();
-
-            return View(jobs);
+            var model = this.GetAllJobs().ToList();
+            return View(model);
         }
 
-        public ActionResult About()
+        public ActionResult Trigger(string job)
         {
-            ViewBag.Message = "Your application description page.";
+            this.TriggerJob(job);
 
-            return View();
+            return Redirect("~/");
         }
 
-        public ActionResult Contact()
+        public ActionResult Cancel(string job)
         {
-            ViewBag.Message = "Your contact page.";
+            this.CancelJob(job);
 
-            return View();
+            return Redirect("~/");
         }
     }
 }

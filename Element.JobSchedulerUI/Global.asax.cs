@@ -1,5 +1,4 @@
 ﻿using Element.JobSchedulerUI.JobScheduler;
-using LightInject;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -18,8 +17,6 @@ namespace Element.JobSchedulerUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var container = GetServiceContainer();
-
             GlobalConfiguration.Configuration.UseJobScheduler((configuration) => {
                 configuration.OnErrorCallback = (job, ex) => { };
                 configuration.OnJobStart = (job) =>
@@ -29,15 +26,6 @@ namespace Element.JobSchedulerUI
                 {
                 };
             });
-        }
-
-        private static IServiceContainer GetServiceContainer()
-        {
-            var container = new ServiceContainer();
-            container.RegisterControllers();
-            container.EnableMvc();
-
-            return container;
         }
     }
 }

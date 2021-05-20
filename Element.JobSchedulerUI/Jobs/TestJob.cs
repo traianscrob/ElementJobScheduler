@@ -7,7 +7,11 @@ namespace Element.JobSchedulerUI.Jobs
     {
         public void Execute(CancellationToken token)
         {
-            
+            Thread.Sleep(5000);
+            token.ThrowIfCancellationRequested();
+            Thread.Sleep(5000);
+            token.ThrowIfCancellationRequested();
+            Thread.Sleep(5000);
         }
     }
 }

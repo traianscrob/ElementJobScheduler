@@ -12,7 +12,7 @@ namespace Element.JobScheduler
         private readonly Timer _timer;
 
         private DateTimeOffset? _startTime;
-        private CancellationTokenSource _cancellationToken;
+        private JobCancellationTokenSource _cancellationToken;
         private bool _manuallyTriggered;
 
         public DateTime? LastRun { get; private set; }
@@ -42,7 +42,7 @@ namespace Element.JobScheduler
             _timer = new Timer((callback) =>
             {
                 var job = Activator.CreateInstance((Type)callback) as IScheduledJob;
-                _cancellationToken = new CancellationTokenSource();
+                _cancellationToken = new JobCancellationTokenSource();
                 Task.Factory.StartNew(() => ExecuteJob(job, _cancellationToken.Token),
                         _cancellationToken.Token,
                         TaskCreationOptions.LongRunning,
@@ -73,8 +73,8 @@ namespace Element.JobScheduler
             }
 
             IsCancelling = true;
-            _cancellationToken?.Cancel(true);
-            _cancellationToken?.Dispose();
+
+            _cancellationToken?.Cancel();
         }
 
         public void Dispose()
